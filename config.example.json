@@ -1,0 +1,12 @@
+{
+    "args": {
+        "default": ["-o", "s3.connections=32"],
+        "backup": ["-o", "s3.connections=32", "--exclude-caches", "--exclude", "/tmp", "-x", "-g", "", "/"]
+    },
+    "repos": {
+        "bengalfox": {
+            "uri": "rest:https://some:one@restic.example.com/computer/main",
+            "password": "ABCD"
+        }
+    }
+}
