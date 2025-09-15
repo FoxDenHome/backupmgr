@@ -22,7 +22,7 @@ license=('GPL-3.0-or-later')
 makedepends=('git' 'go')
 depends=('ltfs')
 source=(
-  'config.json'
+  'config.example.json'
 )
 sha256sums=(
   'SKIP'
