@@ -6,8 +6,9 @@ import (
 )
 
 type Config struct {
-	Args  map[string][]string `json:"args"`
-	Repos map[string]*Repo    `json:"repos"`
+	Args        map[string][]string `json:"args"`
+	Environment []string            `json:"environment"`
+	Repos       map[string]*Repo    `json:"repos"`
 }
 
 type Repo struct {
@@ -15,6 +16,17 @@ type Repo struct {
 	Password string `json:"password"`
 
 	subArgs map[string][]string
+	subEnv  []string
+}
+
+func (r *Repo) setup(cfg *Config) {
+	r.subArgs = make(map[string][]string)
+	for cmd, args := range cfg.Args {
+		if _, ok := r.subArgs[cmd]; !ok {
+			r.subArgs[cmd] = append([]string{"-r", r.URI}, args...)
+		}
+	}
+	r.subEnv = append([]string{"RESTIC_PASSWORD=" + r.Password}, cfg.Environment...)
 }
 
 func LoadConfig(path string) (*Config, error) {

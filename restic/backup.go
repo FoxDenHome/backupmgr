@@ -1,7 +1,7 @@
 package restic
 
 func (r *Repo) Backup() error {
-	err := r.RunJSON("backup")
+	err := r.RunWait("backup")
 	if err != nil {
 		return err
 	}

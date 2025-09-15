@@ -8,15 +8,6 @@ import (
 	"os/exec"
 )
 
-func (r *Repo) setup(cfg *Config) {
-	r.subArgs = make(map[string][]string)
-	for cmd, args := range cfg.Args {
-		if _, ok := r.subArgs[cmd]; !ok {
-			r.subArgs[cmd] = append([]string{"-r", r.URI}, args...)
-		}
-	}
-}
-
 func (r *Repo) makeCmd(json bool, cmd string, args ...string) *exec.Cmd {
 	preArgs := r.subArgs[cmd]
 	if preArgs == nil {
@@ -32,7 +23,7 @@ func (r *Repo) makeCmd(json bool, cmd string, args ...string) *exec.Cmd {
 	cmdArgs = append(cmdArgs, args...)
 
 	eCmd := exec.Command("restic", cmdArgs...)
-	eCmd.Env = append(os.Environ(), "RESTIC_PASSWORD="+r.Password)
+	eCmd.Env = r.subEnv
 	return eCmd
 }
 
