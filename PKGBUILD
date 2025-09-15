@@ -32,7 +32,7 @@ goldflags='' # Hidden tweak for source-ing this file
 
 build() {
   cd "${startdir}"
-  go build -trimpath -ldflags "${goldflags} -X github.com/FoxDenHome/backupmgr/util.version=${pkgver} -X github.com/FoxDenHome/backupmgr/util.gitrev=$(git rev-parse HEAD)" -o "${srcdir}/tapemgr" ./cmd/tapemgr
+  go build -trimpath -ldflags "${goldflags} -X github.com/FoxDenHome/backupmgr/util.version=${pkgver} -X github.com/FoxDenHome/backupmgr/util.gitrev=$(git rev-parse HEAD)" -o "${srcdir}/backupmgr" ./cmd/backupmgr
 }
 
 package() {
