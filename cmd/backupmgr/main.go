@@ -23,7 +23,7 @@ func main() {
 	}
 
 	targetRepo := flag.String("repo", "*", "Name of the repository to use (* for all)")
-	cmdMode := flag.String("mode", "help", "Mode to run in (backup, mount, help)")
+	cmdMode := flag.String("mode", "help", "Mode to run in (backup, mount, prune, help)")
 	flag.Parse()
 
 	switch *cmdMode {
@@ -41,6 +41,14 @@ func main() {
 			err := repo.Mount(flag.Arg(0))
 			if err != nil {
 				log.Printf("Failed to mount repo %s: %v", name, err)
+			}
+		})
+	case "prune":
+		forTargetRepo(true, *targetRepo, config, func(name string, repo *restic.Repo) {
+			log.Printf("Pruning repo %s", name)
+			err := repo.Prune()
+			if err != nil {
+				log.Printf("Failed to prune repo %s: %v", name, err)
 			}
 		})
 	case "help":
