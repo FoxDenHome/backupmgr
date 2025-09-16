@@ -8,7 +8,7 @@ latest_tag="$(git describe --tags --abbrev=0)"
 commits_since_tag="$(git rev-list --count "${latest_tag}..HEAD")"
 tag_suffix=''
 if [ -n "$(git status --porcelain)" ]; then
-  tag_suffix='-dev'
+  tag_suffix='.dev'
   commits_since_tag=$((commits_since_tag + 1))
 fi
 
@@ -23,11 +23,20 @@ makedepends=('git' 'go')
 depends=()
 source=(
   'config.example.json'
-  'backupmgr@.service'
-  'backupmgr@.timer'
-  'backupmgr@.slice'
+  'systemd/backupmgr-backup.service'
+  'systemd/backupmgr-backup.timer'
+  'systemd/backupmgr-backup.slice'
+  'systemd/backupmgr-prune.service'
+  'systemd/backupmgr-prune.timer'
+  'systemd/backupmgr-prune.slice'
 )
 sha256sums=(
+  'SKIP'
+  'SKIP'
+  'SKIP'
+  'SKIP'
+  'SKIP'
+  'SKIP'
   'SKIP'
 )
 
@@ -45,7 +54,10 @@ package() {
   install -Dm755 ./backupmgr "${pkgdir}/usr/bin/backupmgr"
   install -Dm600 ./config.example.json "${pkgdir}/etc/backupmgr/config.json"
 
-  install -Dm644 ./backupmgr@.service "${pkgdir}/usr/lib/systemd/system/backupmgr@.service"
-  install -Dm644 ./backupmgr@.timer "${pkgdir}/usr/lib/systemd/system/backupmgr@.timer"
-  install -Dm644 ./backupmgr@.slice "${pkgdir}/usr/lib/systemd/system/backupmgr@.slice"
+  install -Dm644 ./backupmgr-backup.service "${pkgdir}/usr/lib/systemd/system/backupmgr-backup.service"
+  install -Dm644 ./backupmgr-backup.timer "${pkgdir}/usr/lib/systemd/system/backupmgr-backup.timer"
+  install -Dm644 ./backupmgr-backup.slice "${pkgdir}/usr/lib/systemd/system/backupmgr-backup.slice"
+  install -Dm644 ./backupmgr-prune.service "${pkgdir}/usr/lib/systemd/system/backupmgr-prune.service"
+  install -Dm644 ./backupmgr-prune.timer "${pkgdir}/usr/lib/systemd/system/backupmgr-prune.timer"
+  install -Dm644 ./backupmgr-prune.slice "${pkgdir}/usr/lib/systemd/system/backupmgr-prune.slice"
 }

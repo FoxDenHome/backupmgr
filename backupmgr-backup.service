@@ -1,0 +1,13 @@
+[Unit]
+Description=Run backupmgr --mode=backup
+Conflicts=backupmgr-prune.service
+
+[Service]
+User=root
+Type=simple
+Slice=backupmgr-backup.slice
+Restart=no
+ExecStart=/usr/bin/backupmgr --mode=backup
+
+[Install]
+WantedBy=multi-user.target
