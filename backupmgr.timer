@@ -1,0 +1,9 @@
+[Unit]
+Description=Run backupmgr --mode=cron
+
+[Timer]
+OnBootSec=30m
+OnUnitActiveSec=1h
+
+[Install]
+WantedBy=timers.target

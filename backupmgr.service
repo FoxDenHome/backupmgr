@@ -1,0 +1,12 @@
+[Unit]
+Description=Run backupmgr --mode=cron
+
+[Service]
+User=root
+Type=simple
+Slice=backupmgr.slice
+Restart=no
+ExecStart=/usr/bin/backupmgr --mode=cron
+
+[Install]
+WantedBy=multi-user.target

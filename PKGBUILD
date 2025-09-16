@@ -23,6 +23,9 @@ makedepends=('git' 'go')
 depends=()
 source=(
   'config.example.json'
+  'backupmgr.service'
+  'backupmgr.timer'
+  'backupmgr.slice'
 )
 sha256sums=(
   'SKIP'
@@ -41,4 +44,8 @@ package() {
   mkdir -p "${pkgdir}/etc/backupmgr"
   install -Dm755 ./backupmgr "${pkgdir}/usr/bin/backupmgr"
   install -Dm600 ./config.example.json "${pkgdir}/etc/backupmgr/config.json"
+
+  install -Dm644 ./backupmgr.service "${pkgdir}/usr/lib/systemd/system/backupmgr.service"
+  install -Dm644 ./backupmgr.timer "${pkgdir}/usr/lib/systemd/system/backupmgr.timer"
+  install -Dm644 ./backupmgr.slice "${pkgdir}/usr/lib/systemd/system/backupmgr.slice"
 }

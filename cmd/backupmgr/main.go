@@ -27,6 +27,7 @@ func main() {
 	flag.Parse()
 
 	switch *cmdMode {
+	case "cron":
 	case "backup":
 		forTargetRepo(true, *targetRepo, config, func(name string, repo *restic.Repo) {
 			log.Printf("Backing up repo %s", name)

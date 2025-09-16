@@ -1,0 +1,5 @@
+[Slice]
+CPUQuota=20%
+MemoryHigh=4G
+IOWeight=20
+CPUWeight=idle
