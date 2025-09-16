@@ -1,28 +1,13 @@
 package restic
 
 func (r *Repo) Backup() error {
-	err := r.RunWait("backup")
-	if err != nil {
-		return err
-	}
-
-	return nil
+	return r.RunWait("backup", "backup")
 }
 
 func (r *Repo) Prune() error {
-	err := r.RunWait("prune")
-	if err != nil {
-		return err
-	}
-
-	return nil
+	return r.RunWait("forget", "prune")
 }
 
 func (r *Repo) Mount(target string) error {
-	err := r.RunWait("mount", target)
-	if err != nil {
-		return err
-	}
-
-	return nil
+	return r.RunWait("mount", "mount", target)
 }

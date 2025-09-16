@@ -8,8 +8,8 @@ import (
 	"os/exec"
 )
 
-func (r *Repo) makeCmd(json bool, cmd string, args ...string) *exec.Cmd {
-	preArgs := r.subArgs[cmd]
+func (r *Repo) makeCmd(json bool, cmd string, argCmd string, args ...string) *exec.Cmd {
+	preArgs := r.subArgs[argCmd]
 	if preArgs == nil {
 		preArgs = r.subArgs["default"]
 	}
@@ -27,8 +27,8 @@ func (r *Repo) makeCmd(json bool, cmd string, args ...string) *exec.Cmd {
 	return eCmd
 }
 
-func (r *Repo) RunJSON(cmd string, args ...string) error {
-	eCmd := r.makeCmd(true, cmd, args...)
+func (r *Repo) RunJSON(cmd string, argCmd string, args ...string) error {
+	eCmd := r.makeCmd(true, cmd, argCmd, args...)
 	stdout, err := eCmd.StdoutPipe()
 	if err != nil {
 		return err
@@ -61,8 +61,8 @@ func (r *Repo) RunJSON(cmd string, args ...string) error {
 	return nil
 }
 
-func (r *Repo) RunWait(cmd string, args ...string) error {
-	eCmd := r.makeCmd(false, cmd, args...)
+func (r *Repo) RunWait(cmd string, argCmd string, args ...string) error {
+	eCmd := r.makeCmd(false, cmd, argCmd, args...)
 	eCmd.Stdout = os.Stdout
 	eCmd.Stderr = os.Stderr
 	return eCmd.Run()
