@@ -6,9 +6,12 @@ import (
 	"os"
 
 	"github.com/FoxDenHome/backupmgr/restic"
+	"github.com/FoxDenHome/backupmgr/util"
 )
 
 func main() {
+	log.Printf("backupmgr version %s (git rev %s)", util.GetVersion(), util.GetGitRev())
+
 	configFile := os.Getenv("BACKUPMGR_CONFIG")
 	if configFile == "" {
 		configFile = "/etc/backupmgr/config.json"
