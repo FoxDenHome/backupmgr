@@ -1,7 +1,8 @@
 {
     "args": {
         "default": ["-o", "s3.connections=32"],
-        "backup": ["-o", "s3.connections=32", "--exclude-caches", "--exclude", "/tmp", "-x", "-g", "", "/"]
+        "backup": ["-o", "s3.connections=32", "--exclude-caches", "--exclude", "/tmp", "-x", "-g", "", "/"],
+        "prune": ["-o", "s3.connections=32", "--keep-daily", "7", "--keep-weekly", "5", "--keep-monthly", "12", "--prune"]
     },
     "repos": {
         "bengalfox": {
