@@ -1,5 +1,5 @@
 [Unit]
-Description=Run backupmgr --mode=cron
+Description=Run backupmgr --mode=%i
 
 [Timer]
 OnBootSec=30m
