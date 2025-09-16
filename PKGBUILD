@@ -23,12 +23,12 @@ makedepends=('git' 'go')
 depends=()
 source=(
   'config.example.json'
-  'systemd/backupmgr-backup.service'
-  'systemd/backupmgr-backup.timer'
-  'systemd/backupmgr-backup.slice'
-  'systemd/backupmgr-prune.service'
-  'systemd/backupmgr-prune.timer'
-  'systemd/backupmgr-prune.slice'
+  'backupmgr-backup.service'
+  'backupmgr-backup.timer'
+  'backupmgr-backup.slice'
+  'backupmgr-prune.service'
+  'backupmgr-prune.timer'
+  'backupmgr-prune.slice'
 )
 sha256sums=(
   'SKIP'
