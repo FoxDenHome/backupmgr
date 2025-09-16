@@ -63,4 +63,6 @@ package() {
   install -Dm644 ./backupmgr-prune.timer "${pkgdir}/usr/lib/systemd/system/backupmgr-prune.timer"
   install -Dm644 ./backupmgr-prune.slice "${pkgdir}/usr/lib/systemd/system/backupmgr-prune.slice"
   install -Dm644 ./backupmgr-mount.service "${pkgdir}/usr/lib/systemd/system/backupmgr-mount.service"
+
+  mkdir -p "${pkgdir}/mnt/backupmgr"
 }
