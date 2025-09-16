@@ -1,0 +1,11 @@
+[Unit]
+Description=Run backupmgr --mode=mount /mnt/backupmgr
+
+[Service]
+User=root
+Type=simple
+Restart=no
+ExecStart=/usr/bin/backupmgr --mode=mount /mnt/backupmgr
+
+[Install]
+WantedBy=multi-user.target
