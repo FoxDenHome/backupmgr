@@ -7,16 +7,18 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
+        package = pkgs.buildGoModule {
+          pname = "backupmgr";
+          version = "0.1.0";
+          src = ./.;
+          vendorHash = null;
+          buildInputs = [];
+        };
       in
       {
         packages = {
-          default = pkgs.buildGoModule {
-            pname = "backupmgr";
-            version = "0.1.0";
-            src = ./.;
-            vendorHash = null;
-            buildInputs = [];
-          };
+          default = package;
+          backupmgr = package;
         };
       });
 }
