@@ -9,9 +9,9 @@ import (
 )
 
 func (r *Repo) makeCmd(json bool, cmd string, argCmd string, args ...string) *exec.Cmd {
-	preArgs := r.subArgs[argCmd]
+	preArgs := r.args[argCmd]
 	if preArgs == nil {
-		preArgs = r.subArgs["default"]
+		preArgs = r.args["default"]
 	}
 
 	cmdArgs := []string{cmd}
@@ -23,7 +23,7 @@ func (r *Repo) makeCmd(json bool, cmd string, argCmd string, args ...string) *ex
 	cmdArgs = append(cmdArgs, args...)
 
 	eCmd := exec.Command("restic", cmdArgs...)
-	eCmd.Env = r.subEnv
+	eCmd.Env = r.environment
 	return eCmd
 }
 

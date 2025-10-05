@@ -15,18 +15,16 @@ type Repo struct {
 	URI      string `json:"uri"`
 	Password string `json:"password"`
 
-	subArgs map[string][]string
-	subEnv  []string
+	args        map[string][]string
+	environment []string
 }
 
 func (r *Repo) setup(cfg *Config) {
-	r.subArgs = make(map[string][]string)
-	for cmd, args := range cfg.Args {
-		if _, ok := r.subArgs[cmd]; !ok {
-			r.subArgs[cmd] = append([]string{"-r", r.URI}, args...)
-		}
-	}
-	r.subEnv = append([]string{"RESTIC_PASSWORD=" + r.Password}, cfg.Environment...)
+	r.args = cfg.Args
+	r.environment = append([]string{
+		"RESTIC_PASSWORD=" + r.Password,
+		"RESTIC_REPOSITORY=" + r.URI,
+	}, cfg.Environment...)
 }
 
 func LoadConfig(path string) (*Config, error) {
