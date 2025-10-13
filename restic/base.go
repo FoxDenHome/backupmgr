@@ -24,6 +24,7 @@ func (r *Repo) setup(cfg *Config) {
 	r.environment = append([]string{
 		"RESTIC_PASSWORD=" + r.Password,
 		"RESTIC_REPOSITORY=" + r.URI,
+		"PATH=" + os.Getenv("PATH"),
 	}, cfg.Environment...)
 }
 
